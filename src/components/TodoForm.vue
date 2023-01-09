@@ -1,7 +1,7 @@
 <template>
-  <form id="new-todo-form" @submit.prevent="addTodo">
-    <h4>What's on your todo list?</h4>
+  <div class="field has-addons pb-5">
     <input
+      class="control is-expanded"
       type="text"
       name="content"
       id="content"
@@ -9,41 +9,89 @@
       v-model="input_content"
     />
 
-    <h4>Pick a category</h4>
-    <div class="options">
-      <label>
-        <input
-          type="radio"
-          name="category"
-          id="category1"
-          value="business"
-          v-model="input_category"
-        />
-        <span class="bubble business"></span>
-        <div>Business</div>
-      </label>
+    <button @click="addTodo" class="button is-small is-info">
+      <span class="icon is-small">
+        <i class="fas fa-plus"></i>
+      </span>
+      <span>ADD TODO</span>
+    </button>
+  </div>
 
-      <label>
-        <input
-          type="radio"
-          name="category"
-          id="category2"
-          value="personal"
-          v-model="input_category"
-        />
-        <span class="bubble personal"></span>
-        <div>Personal</div>
-      </label>
+  <h2 class="subtitle is-family-monospace">PICK A CATEGORY</h2>
+  <div class="field has-addons">
+    <div class="control">
+      <div class="select">
+        <select v-model="input_category">
+          <option>Select dropdown</option>
+          <option v-for="category in categories" :key="category.category_name">
+            {{ category.category_name }}
+          </option>
+        </select>
+      </div>
     </div>
 
-    <input type="submit" value="Add todo" />
-  </form>
+    <button
+      @click="addingCategory = !addingCategory"
+      class="button is-small is-info"
+    >
+      <span class="icon is-small">
+        <i class="fas fa-plus"></i>
+      </span>
+      <span>NEW</span>
+    </button>
+  </div>
+
+  <div v-if="addingCategory" class="field has-addons pb-5">
+    <input
+      type="text"
+      name="content"
+      id="content"
+      placeholder="e.g. University"
+      v-model="input_new_category"
+    />
+
+    <button @click="saveCategory" class="button is-small is-success">
+      <span class="icon is-small">
+        <i class="fas fa-floppy-disk"></i>
+      </span>
+      <span>SAVE</span>
+    </button>
+
+    <button @click="cancelCategory" class="button is-small is-danger">
+      <span class="icon is-small">
+        <i class="fas fa-xmark"></i>
+      </span>
+      <span>CANCEL</span>
+    </button>
+  </div>
 </template>
 
 <script setup>
 import { useTodo } from "../composables/useTodo";
+import { ref } from "vue";
 
-const { addTodo, input_category, input_content } = useTodo();
+const {
+  addTodo,
+  addCategory,
+  input_category,
+  input_content,
+  input_new_category,
+  categories,
+} = useTodo();
+
+const addingCategory = ref(true);
+
+const saveCategory = () => {
+  addingCategory.value = !addingCategory.value;
+  addCategory();
+};
+
+const cancelCategory = () => {
+  addingCategory.value = !addingCategory.value;
+  input_new_category.value = "";
+};
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="css" scoped>
+@import "bulma/css/bulma.css";
+</style>

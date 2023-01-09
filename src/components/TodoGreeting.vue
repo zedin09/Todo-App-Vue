@@ -1,18 +1,11 @@
 <template>
   <div>
-    <section class="greeting">
-      <h2 class="title">
-        What's up,
-        <input type="text" id="name" placeholder="Name here" v-model="name" />
-      </h2>
-    </section>
+    <h2 class="title is-family-monospace">TODO APP</h2>
   </div>
 </template>
 
-<script setup>
-import { useTodo } from "../composables/useTodo";
+<script setup></script>
 
-const { name } = useTodo();
-</script>
-
-<style lang="scss" scoped></style>
+<style lang="css" scoped>
+@import "bulma/css/bulma.css";
+</style>

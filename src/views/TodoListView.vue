@@ -5,19 +5,16 @@ import TodoGreeting from "../components/TodoGreeting.vue";
 </script>
 
 <template>
-  <main class="app">
-    <section class="section">
-      <h3 class="subtitle">TODO Greeting</h3>
+  <main class="container">
+    <section class="section pb-1 pt-2">
       <TodoGreeting />
     </section>
 
-    <section class="section">
-      <h3 class="subtitle">CREATE A TODO</h3>
+    <section class="section pb-1">
       <TodoForm />
     </section>
 
     <section class="section">
-      <h3 class="subtitle">TODO LIST</h3>
       <TodoList />
     </section>
   </main>

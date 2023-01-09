@@ -4,7 +4,7 @@ import { defineStore } from "pinia";
 export const useTodoStore = defineStore("todoList", () => {
   // state
   const todos = ref([]);
-  const name = ref("");
+  const categories = ref([]);
 
   // getters
   const todos_asc = computed(() =>
@@ -13,5 +13,5 @@ export const useTodoStore = defineStore("todoList", () => {
     })
   );
 
-  return { todos, todos_asc, name };
+  return { todos, todos_asc, categories };
 });
