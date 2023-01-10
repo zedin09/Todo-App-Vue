@@ -5,14 +5,14 @@
     :key="todo.createdAt"
     class="field has-addons"
   >
-    <div class="tag is-success is-size-5">
+    <div class="tag is-success is-size-6">
       <span class="is-size-7">
         {{ todo.category.toLocaleUpperCase() }}
       </span>
     </div>
 
     <input
-      class="control is-expanded"
+      class="input is-small"
       :id="`todoInput${index}`"
       type="text"
       v-model="todo.content"
@@ -67,6 +67,4 @@ const editTodo = (index, todo) => {
 };
 </script>
 
-<style lang="css" scoped>
-@import "bulma/css/bulma.css";
-</style>
+<style lang="css" scoped></style>

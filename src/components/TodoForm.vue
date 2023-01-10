@@ -1,7 +1,7 @@
 <template>
   <div class="field has-addons pb-5">
     <input
-      class="control is-expanded"
+      class="input is-small"
       type="text"
       name="content"
       id="content"
@@ -19,15 +19,13 @@
 
   <h2 class="subtitle is-family-monospace">PICK A CATEGORY</h2>
   <div class="field has-addons">
-    <div class="control">
-      <div class="select">
-        <select v-model="input_category">
-          <option>Select dropdown</option>
-          <option v-for="category in categories" :key="category.category_name">
-            {{ category.category_name }}
-          </option>
-        </select>
-      </div>
+    <div class="select is-small">
+      <select v-model="input_category">
+        <option>Select dropdown</option>
+        <option v-for="category in categories" :key="category.category_name">
+          {{ category.category_name }}
+        </option>
+      </select>
     </div>
 
     <button
@@ -92,6 +90,4 @@ const cancelCategory = () => {
 };
 </script>
 
-<style lang="css" scoped>
-@import "bulma/css/bulma.css";
-</style>
+<style lang="css" scoped></style>
