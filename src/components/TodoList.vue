@@ -1,6 +1,10 @@
 <template>
   <h2 class="subtitle is-family-monospace">THIS IS YOUR TODO LIST</h2>
-  <div v-for="todo in todos_asc" :key="todo.createdAt" class="field has-addons">
+  <div
+    v-for="(todo, index) in todos_asc"
+    :key="todo.createdAt"
+    class="field has-addons"
+  >
     <div class="tag is-success is-size-5">
       <span class="is-size-7">
         {{ todo.category.toLocaleUpperCase() }}
@@ -9,7 +13,7 @@
 
     <input
       class="control is-expanded"
-      id="todoInput"
+      :id="`todoInput${index}`"
       type="text"
       v-model="todo.content"
       disabled
@@ -22,14 +26,22 @@
       <span>DELETE</span>
     </button>
 
-    <button class="button is-small is-link" @click="editTodo" v-if="!editing">
+    <button
+      class="button is-small is-link"
+      @click="editTodo(index, todo)"
+      v-if="!todo.editable"
+    >
       <span class="icon is-small">
         <i class="fas fa-pen"></i>
       </span>
       <span>EDIT</span>
     </button>
 
-    <button class="button is-small is-success" @click="editTodo" v-else>
+    <button
+      class="button is-small is-success"
+      @click="editTodo(index, todo)"
+      v-else
+    >
       <span class="icon is-small">
         <i class="fas fa-floppy-disk"></i>
       </span>
@@ -40,21 +52,17 @@
 
 <script setup>
 import { useTodo } from "../composables/useTodo";
-import { ref } from "vue";
 
 const { removeTodo, todos_asc } = useTodo();
-const editing = ref(false);
 
-const editTodo = () => {
-  let element = document.getElementById("todoInput");
-  let disabled = element.getAttribute("disabled");
+const editTodo = (index, todo) => {
+  todo.editable = !todo.editable;
+  let element = document.getElementById(`todoInput${index}`);
 
-  if (disabled) {
+  if (todo.editable) {
     element.removeAttribute("disabled");
-    editing.value = true;
   } else {
     element.setAttribute("disabled", "disabled");
-    editing.value = false;
   }
 };
 </script>

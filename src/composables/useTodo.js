@@ -8,6 +8,7 @@ export function useTodo() {
   const input_content = ref("");
   const input_category = ref(null);
   const input_new_category = ref("");
+
   // computed properties
   // watchers
 
