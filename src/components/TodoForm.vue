@@ -77,7 +77,7 @@ const {
   categories,
 } = useTodo();
 
-const addingCategory = ref(true);
+const addingCategory = ref(false);
 
 const saveCategory = () => {
   addingCategory.value = !addingCategory.value;
